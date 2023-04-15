@@ -29,5 +29,11 @@ namespace webapi.Controllers
             })
             .ToArray();
         }
+
+        [HttpGet("/test")]
+        public string Test() 
+        {
+            return "test-string";
+        }
     }
 }
