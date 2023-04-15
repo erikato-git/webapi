@@ -8,7 +8,7 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get('http://localhost:5165/test');
+      const result = await axios.get('http://localhost:5165/db_test');
       console.log(result.data);
       setData(result.data);
     };
