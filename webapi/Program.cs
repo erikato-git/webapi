@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +9,24 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<DataContext>(options => options.UseNpgsql(builder.Configuration["ConnectionStrings:DefaultConnection"]));
+
+builder.Services.AddScoped<IWeatherForecast, WeatherForecastRepository>();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy", policy =>
+    {
+        policy
+        // .AllowAnyOrigin()
+        .WithOrigins("http://localhost:3000")
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .AllowCredentials();
+    });
+});
+
 
 var app = builder.Build();
 
@@ -16,9 +37,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();   // more complicated with docker
 
 app.UseAuthorization();
+app.UseCors("CorsPolicy");
 
 app.UseDefaultFiles();
 app.UseStaticFiles();

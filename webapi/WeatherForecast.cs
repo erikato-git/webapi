@@ -1,8 +1,12 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace webapi
 {
     public class WeatherForecast
     {
-        public DateOnly Date { get; set; }
+        [Key]
+        public Guid Id { get; set; }
+        public DateTime Date { get; set; }
 
         public int TemperatureC { get; set; }
 
