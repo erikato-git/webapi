@@ -89,21 +89,20 @@ using (var scope = app.Services.CreateScope())
 
 // --- Security ---
 
-app.UseXContentTypeOptions();   // prevents MIME-sniffing
-app.UseReferrerPolicy(opt => opt.NoReferrer()); // ?
-app.UseXXssProtection(opt => opt.EnabledWithBlockMode());   // prevents cross-site-scripting-attack
-app.UseXfo(opt => opt.Deny());  // prevents from click-jacking
-// used for white-sourcing - What we want to allow
-app.UseCspReportOnly(opt => opt
-    .BlockAllMixedContent()
-    .StyleSources(s => s.Self().CustomSources("https://fonts.googleapis.com"))
-    .FontSources(s => s.Self())
-    .FormActions(s => s.Self())
-    .FrameAncestors(s => s.Self())
-    .ImageSources(s => s.Self())
-    .ScriptSources(s => s.Self())
-);
-
+// app.UseXContentTypeOptions();   // prevents MIME-sniffing
+// app.UseReferrerPolicy(opt => opt.NoReferrer()); // doesn't refer to
+// app.UseXXssProtection(opt => opt.EnabledWithBlockMode());   // prevents cross-site-scripting-attack
+// app.UseXfo(opt => opt.Deny());  // prevents from click-jacking
+// whitelisting-sources we trust 
+// app.UseCspReportOnly(opt => opt
+//     .BlockAllMixedContent()
+//     .StyleSources(s => s.Self().CustomSources("https://fonts.googleapis.com"))
+//     .FontSources(s => s.Self())
+//     .FormActions(s => s.Self())
+//     .FrameAncestors(s => s.Self())
+//     .ImageSources(s => s.Self())
+//     .ScriptSources(s => s.Self())
+// );
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -113,14 +112,24 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
-    // app.UseHsts
     app.Use(async (context, next) => {
         context.Response.Headers.Add("Strict-Transport-Security", "max-age=31536000");  // max-age=31536000 = 1 year
         await next.Invoke();
     });
 }
 
-// app.UseHttpsRedirection();   // more complicated with docker
+app.Use(async (context, next) =>
+{
+    context.Response.Headers.Add("X-Xss-Protection", "1");
+    context.Response.Headers.Add("X-Frame-Options", "SAMEORIGIN");
+    context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
+    context.Response.Headers.Add("Referrer-Policy", "no-referrer");
+
+    await next();  
+});
+
+app.UseHttpsRedirection();   // more complicated with docker
+
 
 app.UseAuthorization();
 app.UseCors("CorsPolicy");
