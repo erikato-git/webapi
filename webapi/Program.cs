@@ -120,7 +120,7 @@ else
         context.Response.Headers.Add("Referrer-Policy", "no-referrer");
         
         context.Response.Headers.Add(  
-        "Content-Security-Policy",  
+        "Content-Security-Policy-Report-Only",  
         "default-src 'self'" +
         "script-src-elem 'self'" +  
         "style-src-elem 'self'" +  
