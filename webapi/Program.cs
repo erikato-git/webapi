@@ -27,7 +27,7 @@ builder.Services.AddDbContext<DataContext>(options =>
     }
     else
     {
-        // Use connection string provided at runtime by Flyio.
+        // Use connection string provided at runtime by Flyio/Heroku.
         var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
 
         // Parse connection URL to connection string for Npgsql
@@ -44,8 +44,6 @@ builder.Services.AddDbContext<DataContext>(options =>
         connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};";
     }
 
-    // Whether the connection string came from the local development configuration file
-    // or from the environment variable from FlyIO, use it to set up your DbContext.
     options.UseNpgsql(connStr);
 });
 
@@ -57,7 +55,6 @@ builder.Services.AddCors(options =>
     options.AddPolicy("CorsPolicy", policy =>
     {
         policy
-        // .AllowAnyOrigin()
         .WithOrigins("http://localhost:3000")
         .AllowAnyMethod()
         .AllowAnyHeader()
