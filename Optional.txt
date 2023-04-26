@@ -1,4 +1,4 @@
-If problems with Heroku not connection to postgres try to use the code below. Maybe the connection-string has changed.
+If problems with Heroku not connection to postgres try to use the code below in Program.cs. Maybe the connection-string has changed.
 But be careful - the below won't work with the Dockerfile because it runs in production mode and will try to pull the connection from an imaginary Heroku-server.
 
 // Get connection-string from Heroku, because Heroku-connection will change

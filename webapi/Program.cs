@@ -13,7 +13,20 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<DataContext>(options =>
 {
-        options.UseNpgsql(builder.Configuration["ConnectionStrings:DefaultConnection"]);
+    var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+    string connStr;
+
+    // for 'dotnet run'
+    if (env == "Development")
+    {
+        connStr = builder.Configuration["ConnectionStrings:DevelopmentConnection"];
+        options.UseNpgsql(connStr);
+    }
+    // for 'docker-compose'
+    else
+    {
+        options.UseNpgsql(builder.Configuration["ConnectionStrings:ProductionConnection"]);
+    }
 });
 
 builder.Services.AddScoped<IWeatherForecast, WeatherForecastRepository>();
