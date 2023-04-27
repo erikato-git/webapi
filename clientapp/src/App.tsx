@@ -8,11 +8,14 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      await axios.get('http://localhost:5165/db_test')
+      
+      await axios.get(process.env.REACT_APP_BASE_URL + 'db_test')
             .then((e) => {
               console.log(e.data);
             })
     };
+
+    console.log(process.env);
 
     fetchData();
   }, []);

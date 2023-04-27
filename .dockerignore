@@ -1,2 +1,11 @@
 **/bin/
 **/obj/
+.git
+.vscode
+.gitignore
+node_modules
+Dockerfile
+docker-compose.yml
+*.md
+*.txt
+
