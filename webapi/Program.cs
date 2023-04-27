@@ -48,6 +48,8 @@ builder.Services.AddDbContext<DataContext>(options =>
             var pgPort = pgHostPort.Split(":")[1];
 
             connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};";
+
+            options.UseNpgsql(connStr);
         }
     }
 });
