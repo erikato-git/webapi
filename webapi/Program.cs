@@ -22,7 +22,7 @@ builder.Services.AddDbContext<DataContext>(options =>
         connStr = builder.Configuration["ConnectionStrings:DevelopmentConnection"];
         options.UseNpgsql(connStr);
     }
-    // for 'docker-compose'
+    // for 'docker-compose' and deploy to Heroku
     else
     {
         var docker = Environment.GetEnvironmentVariable("Docker_Env");
