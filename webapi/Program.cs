@@ -33,7 +33,7 @@ builder.Services.AddDbContext<DataContext>(options =>
         }
         else
         {
-            // Use connection string provided at runtime by Flyio/Heroku.
+            // Use connection string provided at runtime by Heroku.
             var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
 
             // Parse connection URL to connection string for Npgsql
