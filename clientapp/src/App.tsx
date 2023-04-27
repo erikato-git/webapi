@@ -15,8 +15,6 @@ function App() {
             })
     };
 
-    console.log(process.env);
-
     fetchData();
   }, []);
 
