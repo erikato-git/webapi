@@ -31,6 +31,7 @@ builder.Services.AddDbContext<DataContext>(options =>
         {
             options.UseNpgsql(builder.Configuration["ConnectionStrings:ProductionConnection"]);
         }
+        // Heroku
         else
         {
             // Use connection string provided at runtime by Heroku.
