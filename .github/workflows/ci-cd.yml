@@ -3,7 +3,7 @@ name: Continuous Integration (not deployment)
 on:
     push:
         branches:
-            - '**'
+            - 'main'
 
 jobs:
     build:
