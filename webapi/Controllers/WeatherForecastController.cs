@@ -31,11 +31,31 @@ namespace webapi.Controllers
             .ToArray();
         }
 
-        [HttpGet("/test")]
+        [HttpPost("/add_weatherForecast")]
+        public async Task<ActionResult<WeatherForecast>> AddWeatherForecast([FromBody] WeatherForecast w)
+        {
+            try
+            {
+                var result = await _weatherForecastRepository.AddWeatherForecast(w);
+                if(!result)
+                {
+                    return BadRequest("Database error");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpGet("/test_string")]
         public string Test() 
         {
             return "test-string";
         }
+
 
         [HttpGet("/db_test")]
         public async Task<ActionResult<IEnumerable<WeatherForecast>>> DbTest(){
