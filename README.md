@@ -9,7 +9,7 @@ Make sure docker/docker-desktop is installed on your computer > open up terminal
 ```
 docker run -d -p 5432:5432 -e POSTGRES_USERNAME=postgres -e POSTGRES_PASSWORD=example postgres:latest
 ```
-make sure the docker container is running by typing ```docker ps``` <br>
+the environmental variables for POSTGRES_USERNAME and POSTGRES_PASSWORD are configured for the current connection-string in appsettings.json. Make sure the docker container is running by typing ```docker ps``` <br>
 
 Activate server. Navigate terminal to 'webapi/webapi' (same folder as 'webapi.csproj') and type:
 ```
