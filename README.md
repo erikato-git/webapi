@@ -50,7 +50,7 @@ Server:
 - Continuous-Integration: configured to notice if errors occur during build and tests when pusing to main branch on github. 
 
 Client:
-- Environment variables: different environment variables are configured to the build process of the client. For deployment 'http://localhost:5165/' in the url needs to be removed when client received requests from the server.
+- Environment variables: different environment variables are configured to the build process of the client. For deployment 'http://localhost:5165/' in the url needs to be removed when client receives requests from the server.
 - Builds: Besides environmental variables the different build modes are configured to make a production build of the client-app deployed on backend in folder 'wwwroot' and the deployment mode is sat to not generate source map which will expose client source code in the browser. The two build modes can be activated in the terminal by typing ```npm run build:dev``` or ```npm run build:deploy```  
 - Simple example of the receiving a request from the server (based on the running environment)
 
