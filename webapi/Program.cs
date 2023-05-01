@@ -113,12 +113,11 @@ else
         context.Response.Headers.Add("Referrer-Policy", "no-referrer");
         context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; frame-src 'self'");
         
-
         await next();
     });
 }
 
-app.UseHttpsRedirection();   // more complicated with docker
+app.UseHttpsRedirection(); 
 
 
 app.UseAuthorization();
