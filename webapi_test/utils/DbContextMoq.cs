@@ -1,18 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore;
-using webapi.Controllers;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using webapi;
 
-namespace webapi_test
+namespace webapi_test.utils
 {
-    public class TestSetups
+    public class DbContextMoq
     {
-        // NB: Consider to use a real database for testing - https://www.youtube.com/watch?v=MhEa8fENJqM&list=TLPQMjcwNDIwMjM7KrZe6nBXHw&index=5 (22:00)
-        public async Task<DataContext> DbContextMoqAsync()
+        public async Task<DataContext> Instance()
         {
             var options = new DbContextOptionsBuilder<DataContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
                 .Options;
+
             var fakeDb = new DataContext(options);
+            
             if (await fakeDb.WeatherForecasts.CountAsync() == 0)
             {
                 var tmpWeatherForecasts = new List<WeatherForecast>()
@@ -44,22 +46,6 @@ namespace webapi_test
 
             return fakeDb;
         }
-
-        public async Task<WeatherForecastController> WeatherForecastControllerMoqAsync()
-        {
-            var fakeDb = await DbContextMoqAsync();
-
-            // --- Automapper ---
-            // var config = new MapperConfiguration(cfg =>
-            // {
-            //     cfg.AddProfile(new MapperService());    // in Webapi, MapperService responsible for mapping DTOs and model-classes
-            // });
-            // var mapper = config.CreateMapper();
-            // var weatherForecastRepository = new WeatherForecastRepository(fakeDb,mapper);
-
-            var weatherForecastRepository = new WeatherForecastRepository(fakeDb);
-            var controller = new WeatherForecastController(weatherForecastRepository);
-            return controller;
-        }
     }
+
 }
