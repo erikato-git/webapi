@@ -5,7 +5,7 @@
 ### Run application in VS Code:
 #### Run in development mode:
 Activate database. Run postgres in a docker container. <br>
-Make sure docker/docker-desktop is install on your computer > open up terminal and type:
+Make sure docker/docker-desktop is installed on your computer > open up terminal and type:
 ```
 docker run -d -p 5432:5432 -e POSTGRES_USERNAME=postgres -e POSTGRES_PASSWORD=example postgres:latest
 ```
@@ -39,14 +39,14 @@ Open up browser and navigate to url: http://localhost:5165/
 ### Template overview:
 Server:
 - Simple example of interactions between Repository, Interface and Controller.
-- DataContext-class with init data configured with dependency injection Program.cs.
+- DataContext-class with init data which is configured with dependency injection in Program.cs.
 - AddDbContext configured in three different modes in postgres with dependency injection in Program.cs (can easily be changed to mssql): 
   - 1. Development mode: Configured to one connection-string used for developement.
   - 2. Production mode: Configured to another connection-string used for production.
-  - 3. Deployment mode: Configured to use connection-string provided by the host eg. Heroku or flyio.
+  - 3. Deployment mode: Configured to antoher connection-string used for deployment for eg. Heroku and flyio.
 - Cors-policy: Server is configured to listen to client on http://localhost:3000
-- Security is configured for http-header-requests and makes an 'A' on https://securityheaders.com/
-- FallbackController configures the default-landing page when running the application the index.html of the build-version of client which is to be find in 'wwwwroot'.
+- Security is configured for http-header-requests and returns an 'A' on https://securityheaders.com/
+- FallbackController configures the default-landing page when running the application to the index.html of the build-version of client which is to be find in 'wwwwroot'.
 - Continuous-Integration: configured to notice if errors occur during build and tests when pusing to main branch on github. 
 
 Client:
