@@ -47,12 +47,12 @@ Server:
 - Cors-policy: Server is configured to listen to client on http://localhost:3000
 - Security is configured for http-header-requests and returns an 'A' on https://securityheaders.com/
 - FallbackController configures the default-landing page when running the application to the index.html of the build-version of client which is to be find in 'wwwwroot'.
-- Continuous-Integration: configured to notice if errors occur during build and tests when pusing to main branch on github. 
+- Continuous-Integration: configured to notice if errors occur during build and tests when pushing to main branch on github. 
 
 Client:
 - Environment variables: different environment variables are configured to the build process of the client. For deployment 'http://localhost:5165/' in the url needs to be removed when client receives requests from the server.
-- Builds: Besides environmental variables the different build modes are configured to make a production build of the client-app deployed on backend in folder 'wwwroot' and the deployment mode is sat to not generate source map which will expose client source code in the browser. The two build modes can be activated in the terminal by typing ```npm run build:dev``` or ```npm run build:deploy```  
-- Simple example of the receiving a request from the server (based on the running environment)
+- Builds: Besides environment variables the different build modes are configured to make a production build of the client-app deployed on backend in folder 'wwwroot' and the deployment mode is sat to not generate source map which will expose client source code in the browser. The two build modes can be activated in the terminal by typing ```npm run build:dev``` or ```npm run build:deploy```  
+- Simple example of receiving a request from the server and displaying the data from database in the console of the browser (based on the running environment)
 
 Tests:
 - Simple test on a server-method call. Checking for status-code and data-type.
