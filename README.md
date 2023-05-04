@@ -27,7 +27,7 @@ Open up a browser and navigate to url: http://localhost:3000/
 
 <br>
 
-#### Run in production mode with docker-compose:
+#### Run in production mode with docker-compose (currently doesn't work):
 Navigate to same folder as docker-compose.yml in terminal (the root of the project) and type:
 ```
 docker-compose up --build -d
